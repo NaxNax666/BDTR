@@ -23,6 +23,7 @@ namespace BDTR
 
         private void WorkCoach_Click(object sender, EventArgs e)
         {
+            if (FIOTBx.Text =="" || PstnBx.Text == "" || SLTBx.Text == "") { 
             string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=JOJOfit;Integrated Security=True";
             SqlConnection connection = new SqlConnection(connectionString);
             connection.Open();
@@ -35,7 +36,12 @@ namespace BDTR
             sqlDataAdapter.Fill(dataSet, "scl");
             connection.Close();
             this.Close();
-        }
+            }
+            else
+            {
+                MessageBox.Show("Заполните все поля", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+}
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -63,7 +69,9 @@ namespace BDTR
 
         private void FireCoach_Click(object sender, EventArgs e)
         {
-            string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=JOJOfit;Integrated Security=True";
+            if (FIOTBx.Text == "" )
+            {
+                string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=JOJOfit;Integrated Security=True";
             SqlConnection connection = new SqlConnection(connectionString);
             connection.Open();
             DataSet dataSet = new DataSet();
@@ -73,5 +81,10 @@ namespace BDTR
             connection.Close();
             this.Close();
         }
+            else
+            {
+                MessageBox.Show("Введите имя Тренера", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+}
     }
 }

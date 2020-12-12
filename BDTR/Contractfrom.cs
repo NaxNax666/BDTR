@@ -29,17 +29,23 @@ namespace BDTR
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=JOJOfit;Integrated Security=True";
-            SqlConnection connection = new SqlConnection(connectionString);
-            connection.Open();
-            string ask = String.Format("select Title, duration, cost_month*{0} as total from Program_list where Title='{1}'", textBox1.Text, Program_list.Text);
-            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(ask, connection);
-            DataSet dataSet = new DataSet();
-            sqlDataAdapter.Fill(dataSet, "Prg");
-            sqlDataAdapter.Fill(currDataSet, "Prg");
-            dataGridView1.DataSource = dataSet.Tables[0];
-            connection.Close();
-            ContractAccept.Enabled = true;
+            if (textBox1.Text == "" || Program_list.Text=="")
+            {
+                string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=JOJOfit;Integrated Security=True";
+                SqlConnection connection = new SqlConnection(connectionString);
+                connection.Open();
+                string ask = String.Format("select Title, duration, cost_month*{0} as total from Program_list where Title='{1}'", textBox1.Text, Program_list.Text);
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(ask, connection);
+                DataSet dataSet = new DataSet();
+                sqlDataAdapter.Fill(dataSet, "Prg");
+                sqlDataAdapter.Fill(currDataSet, "Prg");
+                dataGridView1.DataSource = dataSet.Tables[0];
+                connection.Close();
+                ContractAccept.Enabled = true;
+            }
+            else{
+                MessageBox.Show("Введите длительность и выберите программу", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -77,6 +83,7 @@ namespace BDTR
 
         private void Offer_Button_Click(object sender, EventArgs e)
         {
+
             string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=JOJOfit;Integrated Security=True";
             SqlConnection connection = new SqlConnection(connectionString);
             connection.Open();
@@ -86,6 +93,7 @@ namespace BDTR
             sqlDataAdapter.Fill(dataSet, "ClPg");
             dataGridView1.DataSource = dataSet.Tables[0];
             connection.Close();
+
         }
 
         private void Contractfrom_Load(object sender, EventArgs e)

@@ -31,8 +31,9 @@ namespace BDTR
 
         private void ContractAccept_Click(object sender, EventArgs e)
         {
-            
-            string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=JOJOfit;Integrated Security=True";
+            if (FIOTBx.Text != ""|| PhNTBx.Text != ""|| MainLike.Text != "")
+            {
+                string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=JOJOfit;Integrated Security=True";
             SqlConnection connection = new SqlConnection(connectionString);
             connection.Open();
             DataSet dataSet = new DataSet();
@@ -52,6 +53,11 @@ namespace BDTR
             }
             connection.Close();
             this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Заполните все поля", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void AddClientForm_Load(object sender, EventArgs e)
@@ -75,6 +81,8 @@ namespace BDTR
 
         private void CLNTDEL_Click(object sender, EventArgs e)
         {
+            if (FIOTBx.Text != "") { 
+
             string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=JOJOfit;Integrated Security=True";
             SqlConnection connection = new SqlConnection(connectionString);
             connection.Open();
@@ -84,6 +92,42 @@ namespace BDTR
             sqlDataAdapter.Fill(dataSet, "Prg");
             connection.Close();
             this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Введите имя Клиента", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+}
+
+        private void AddLike_Button_Click(object sender, EventArgs e)
+        {
+            if (FIOTBx.Text != "" || ExtraLike.Text!="") {
+                string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=JOJOfit;Integrated Security=True";
+                SqlConnection connection = new SqlConnection(connectionString);
+                connection.Open();
+                DataSet dataSet = new DataSet();
+
+                SqlDataAdapter sqlDataAdapter;
+                string ask;
+                char[] separators = new char[] { ' ', ',' };
+                string[] subs = ExtraLike.Text.Split(separators, StringSplitOptions.RemoveEmptyEntries);
+                foreach (string buff in subs)
+                {
+                    if (MainLike.Items.Contains(buff))
+                    {
+                        ask = String.Format("exec [dbo].[AddUserlike] '{0}','{1}'", buff, FIOTBx.Text);
+                        sqlDataAdapter = new SqlDataAdapter(ask, connection);
+                        sqlDataAdapter.Fill(dataSet, "Lik");
+
+                    }
+                }
+                connection.Close();
+                this.Close(); 
+            }
+            else
+            {
+                MessageBox.Show("Введите клиента и предпочтение", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

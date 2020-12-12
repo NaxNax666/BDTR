@@ -52,6 +52,7 @@
             this.AddLike_Button.TabIndex = 17;
             this.AddLike_Button.Text = "Добавить Предпочтение";
             this.AddLike_Button.UseVisualStyleBackColor = true;
+            this.AddLike_Button.Click += new System.EventHandler(this.AddLike_Button_Click);
             // 
             // label3
             // 
