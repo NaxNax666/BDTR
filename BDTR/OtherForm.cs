@@ -70,7 +70,7 @@ namespace BDTR
             SqlConnection connection = new SqlConnection(connectionString);
             connection.Open();
             DataSet dataSet = new DataSet();
-            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter("select * from InvLook", connection);
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter("select Title as ProgName, InvName from InvLook", connection);
             sqlDataAdapter.Fill(dataSet, "Prg");
             Showdata.DataSource = dataSet.Tables[0];
             connection.Close();

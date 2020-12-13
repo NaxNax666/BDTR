@@ -90,7 +90,7 @@
             this.InvBut.Name = "InvBut";
             this.InvBut.Size = new System.Drawing.Size(163, 57);
             this.InvBut.TabIndex = 5;
-            this.InvBut.Text = "Управление Инветарем";
+            this.InvBut.Text = "Управление Инвентарем";
             this.InvBut.UseVisualStyleBackColor = true;
             this.InvBut.Click += new System.EventHandler(this.InvBut_Click);
             // 
