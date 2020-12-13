@@ -6,13 +6,15 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Configuration;
 
 namespace BDTR
 {
     public partial class MainForm : Form
         
     {
-       
+
+        private string connectionString = ConfigurationManager.ConnectionStrings["BDTR.Properties.Settings.FitClub_primaryConnectionString"].ConnectionString;
         public MainForm()
         {
             InitializeComponent();
@@ -25,7 +27,7 @@ namespace BDTR
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=JOJOfit;Integrated Security=True";
+            //string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=JOJOfit;Integrated Security=True";
             SqlConnection connection = new SqlConnection(connectionString);
             connection.Open();
             SqlDataAdapter sqlDataAdapter = new SqlDataAdapter("Select FIO from Staff", connection);
@@ -77,7 +79,7 @@ namespace BDTR
 
         private void button3_Click(object sender, EventArgs e)
         {
-            string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=JOJOfit;Integrated Security=True";
+            //string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=JOJOfit;Integrated Security=True";
             SqlConnection connection = new SqlConnection(connectionString);
             connection.Open();
             SqlDataAdapter sqlDataAdapter = new SqlDataAdapter("Select FIO from Client", connection);

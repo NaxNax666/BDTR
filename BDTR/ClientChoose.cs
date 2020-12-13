@@ -6,11 +6,13 @@ using System.Drawing;
 using System.Text;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using System.Configuration;
 
 namespace BDTR
 {
     public partial class ClientChoose : Form
     {
+        private string connectionString = ConfigurationManager.ConnectionStrings["BDTR.Properties.Settings.FitClub_primaryConnectionString"].ConnectionString;
         private string clientName;
         public ClientChoose()
         {
@@ -24,7 +26,7 @@ namespace BDTR
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=JOJOfit;Integrated Security=True";
+            //string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=JOJOfit;Integrated Security=True";
             SqlConnection connection = new SqlConnection(connectionString);
             connection.Open();
             string ask = "select * from [dbo].[MyContract]('" + clientName + "')";

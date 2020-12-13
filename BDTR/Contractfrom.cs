@@ -6,6 +6,8 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Configuration;
+
 
 namespace BDTR
 {
@@ -13,6 +15,7 @@ namespace BDTR
     {
         private string clientName;
         private DataSet currDataSet = new DataSet();
+        private string connectionString = ConfigurationManager.ConnectionStrings["BDTR.Properties.Settings.FitClub_primaryConnectionString"].ConnectionString;
         public Contractfrom()
         {
             InitializeComponent();
@@ -31,7 +34,7 @@ namespace BDTR
         {
             if (textBox1.Text == "" || Program_list.Text=="")
             {
-                string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=JOJOfit;Integrated Security=True";
+                //string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=JOJOfit;Integrated Security=True";
                 SqlConnection connection = new SqlConnection(connectionString);
                 connection.Open();
                 string ask = String.Format("select Title, duration, cost_month*{0} as total from Program_list where Title='{1}'", textBox1.Text, Program_list.Text);
@@ -59,7 +62,7 @@ namespace BDTR
                     st.Add(row[column].ToString());
                 }
             }
-            string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=JOJOfit;Integrated Security=True";
+            //string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=JOJOfit;Integrated Security=True";
             SqlConnection connection = new SqlConnection(connectionString);
             connection.Open();
             string ask = String.Format("exec [dbo].[AddContract] '{0}','{1}',{2}", clientName,st[0],st[1]);
@@ -84,7 +87,7 @@ namespace BDTR
         private void Offer_Button_Click(object sender, EventArgs e)
         {
 
-            string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=JOJOfit;Integrated Security=True";
+            //string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=JOJOfit;Integrated Security=True";
             SqlConnection connection = new SqlConnection(connectionString);
             connection.Open();
             string ask = "select * from [dbo].[offerprog]('" + clientName + "')";
@@ -101,7 +104,7 @@ namespace BDTR
             
             // TODO: данная строка кода позволяет загрузить данные в таблицу "fitClub_primaryDataSet.Program_list". При необходимости она может быть перемещена или удалена.
             this.program_listTableAdapter.Fill(this.fitClub_primaryDataSet.Program_list);
-            string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=JOJOfit;Integrated Security=True";
+            //string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=JOJOfit;Integrated Security=True";
             SqlConnection connection = new SqlConnection(connectionString);
             connection.Open();
             string ask = "select Title from Program_list";

@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using System.Configuration;
 
 namespace BDTR
 {
@@ -15,6 +16,7 @@ namespace BDTR
         {
             InitializeComponent();
         }
+        private string connectionString = ConfigurationManager.ConnectionStrings["BDTR.Properties.Settings.FitClub_primaryConnectionString"].ConnectionString;
 
         public OtherForm(string st)
         {
@@ -24,7 +26,7 @@ namespace BDTR
         }
         private void ClientCheck_Click(object sender, EventArgs e)
         {
-            string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=JOJOfit;Integrated Security=True";
+            //string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=JOJOfit;Integrated Security=True";
             SqlConnection connection = new SqlConnection(connectionString);
             connection.Open();
             DataSet dataSet = new DataSet();
@@ -37,7 +39,7 @@ namespace BDTR
 
         private void showProgram_Click(object sender, EventArgs e)
         {
-            string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=JOJOfit;Integrated Security=True";
+            //string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=JOJOfit;Integrated Security=True";
             SqlConnection connection = new SqlConnection(connectionString);
             connection.Open();
             DataSet dataSet = new DataSet();
@@ -54,7 +56,7 @@ namespace BDTR
 
         private void Coachshow_Click(object sender, EventArgs e)
         {
-            string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=JOJOfit;Integrated Security=True";
+            //string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=JOJOfit;Integrated Security=True";
             SqlConnection connection = new SqlConnection(connectionString);
             connection.Open();
             DataSet dataSet = new DataSet();
@@ -66,7 +68,7 @@ namespace BDTR
 
         private void Invbutton_Click(object sender, EventArgs e)
         {
-            string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=JOJOfit;Integrated Security=True";
+            //string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=JOJOfit;Integrated Security=True";
             SqlConnection connection = new SqlConnection(connectionString);
             connection.Open();
             DataSet dataSet = new DataSet();

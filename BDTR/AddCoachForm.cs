@@ -6,11 +6,13 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using System.Configuration;
 
 namespace BDTR
 {
     public partial class AddCoachForm : Form
     {
+        private string connectionString = ConfigurationManager.ConnectionStrings["BDTR.Properties.Settings.FitClub_primaryConnectionString"].ConnectionString;
         public AddCoachForm()
         {
             InitializeComponent();
@@ -24,7 +26,7 @@ namespace BDTR
         private void WorkCoach_Click(object sender, EventArgs e)
         {
             if (FIOTBx.Text =="" || PstnBx.Text == "" || SLTBx.Text == "") { 
-            string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=JOJOfit;Integrated Security=True";
+            //string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=JOJOfit;Integrated Security=True";
             SqlConnection connection = new SqlConnection(connectionString);
             connection.Open();
             DataSet dataSet = new DataSet();
@@ -50,7 +52,7 @@ namespace BDTR
 
         private void AddCoachForm_Load(object sender, EventArgs e)
         {
-            string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=JOJOfit;Integrated Security=True";
+            //string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=JOJOfit;Integrated Security=True";
             SqlConnection connection = new SqlConnection(connectionString);
             connection.Open();
             string ask = "select Title from Program_list";
@@ -71,7 +73,7 @@ namespace BDTR
         {
             if (FIOTBx.Text == "" )
             {
-                string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=JOJOfit;Integrated Security=True";
+                //string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=JOJOfit;Integrated Security=True";
             SqlConnection connection = new SqlConnection(connectionString);
             connection.Open();
             DataSet dataSet = new DataSet();
